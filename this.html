@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+<body>
+    
+    <script>
+
+        /* function test(){
+            console.log(this);
+            let test2 = function(){
+                console.log(this);
+            }
+        }
+
+        test(); */
+
+        /* let test2 = {
+            a: 15,
+            b: 21, 
+            f1: function(){
+                console.log(this.a + this.b);
+                console.log(this)
+            }
+        }
+
+        test2.f1(); */
+
+        /* let test3 = {
+            t1: function(){
+                console.log(this);
+                function innerTest(a, b, c){
+                    console.log(this);
+                }
+                innerTest.call(this, 1, 2, 3); // ссылка на объект (тут: this)
+                innerTest.apply(this, [1, 2, 3]); // аналогичный, но массив
+            }
+        }
+
+        test3.t1(); */
+
+        /* let test4 = {
+            t1: function(){
+                console.log(this);
+                function innerTest(a, b, c){
+                    console.log(this);
+                }
+                //let context = innerTest.bind(this); // не вызывает ф-ию сразу
+                //context();
+                innerTest.bind(this)();
+            }
+        }
+
+        test4.t1(); */
+
+       /*  function NewShowNumber(number){
+            this.number = number;
+            this.timer = setInterval(show.bind(this), 400);
+
+            function show(){
+                console.log(++this.number);
+                if (this.number == 10) clearInterval(this.timer);
+
+            }
+            show(1);
+        }
+
+        let show1 = new NewShowNumber(0); */
+
+        /* function NewShowNumber(number){
+            this.number = number;
+            this.timer = setInterval(() => {
+                console.log(++this.number);
+                console.log(this);
+                if (this.number == 10) clearInterval(this.timer);
+            }, 500)
+        }
+            let show1 = new NewShowNumber(0); */ // контекст не теряется в стрелочной ф-ии!
+
+        let person = {
+            name: 'Alex',
+            age: 25,
+            logInfo: function(job, phone){
+                console.log(`name is ${this.name}`);
+                console.log(`age is ${this.age}`);
+                console.log(`job is ${job}`);
+                console.log(`phone is ${phone}`);
+            }
+        }
+
+        person.logInfo('FD', '123456789')
+
+        let Peter = {
+            name: 'Peter',
+            age: 20,
+        }
+
+        let infoPeter = person.logInfo.bind(Peter); // берет контекст из Peter
+        infoPeter('сварщик', '1234567890')
+
+    </script>
+
+</body>
+</html>
