@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this-pract</title>
+</head>
+<body>
+    <script>
+
+        //2.
+
+        /* let clock = {
+            f1: function Clock(h, min, sec){
+                console.log(this);
+                this.h = h;
+                this.min = min;
+                this.sec = sec;
+                this.timer = setInterval(() => {
+                    if (this.sec < 10) {
+                        console.log(`${h}:${min}:0${++this.sec}`)
+                    }
+                }, 1000)
+            }
+        }
+
+        let showTime = clock.f1(23, 59, 0); */
+        
+        //2.1
+
+        function Clock(hour, min, sec){
+            this.hour = hour;
+            this.min = min;
+            this.sec = sec;
+        }
+            Clock.prototype.correctTime = function(){
+                return `${(this.hour < 10) ? '0' + this.hour : this.hour} : ${(this.min < 10) ? '0' + this.min : this.min} : ${(this.sec < 10) ? '0' + this.sec : this.sec}`;
+            }
+
+            Clock.prototype.setTimeFromSeconds = function(seconds){
+                if (seconds >= 24 * 3600) seconds = seconds - 24 * 3600;
+                this.hour = Math.trunc(seconds / 3600);
+                this.min = Math.trunc(seconds - (this.hour * 3600) / 60);
+                this.sec = seconds - (this.hour * 3600 + this.min * 60)
+            }
+        
+
+
+    </script>
+</body>
+</html>
