@@ -26,8 +26,6 @@
         }
 
         let showTime = clock.f1(23, 59, 0); */
-        
-        //2.1
 
         function Clock(hour, min, sec){
             this.hour = hour;
@@ -35,17 +33,33 @@
             this.sec = sec;
         }
             Clock.prototype.correctTime = function(){
-                return `${(this.hour < 10) ? '0' + this.hour : this.hour} : ${(this.min < 10) ? '0' + this.min : this.min} : ${(this.sec < 10) ? '0' + this.sec : this.sec}`;
+                return `${(this.hour < 10) ? '0' + this.hour : this.hour}:${(this.min < 10) ? '0' + this.min : this.min}:${(this.sec < 10) ? '0' + this.sec : this.sec}`;
             }
 
-            Clock.prototype.setTimeFromSeconds = function(seconds){
+            /* Clock.prototype.setTimeFromSeconds = function(seconds){
                 if (seconds >= 24 * 3600) seconds = seconds - 24 * 3600;
                 this.hour = Math.trunc(seconds / 3600);
                 this.min = Math.trunc(seconds - (this.hour * 3600) / 60);
                 this.sec = seconds - (this.hour * 3600 + this.min * 60)
-            }
+            } */
         
+            Clock.prototype.insertTime = function(){
+                if(this.sec < 60){this.sec++;}
+                if(this.sec == 60){this.sec = 0; this.min++;}
+                //if(this.min < 60){this.min++;}
+                if(this.min == 60){this.min = 0; this.hour++;}
+                if(this.hour == 24){this.hour = 0;}
+            }
 
+            Clock.prototype.startTime = function(){
+                setInterval((function(){
+                    this.insertTime();
+                    console.log(this.correctTime());
+                }).bind(this), 1000)
+            }
+
+            let clock = new Clock(23, 59, 50);
+            clock.startTime();
 
     </script>
 </body>
